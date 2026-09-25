@@ -1,0 +1,11 @@
+import { readFileSync, existsSync } from 'node:fs';
+import assert from 'node:assert/strict';
+const html = readFileSync(new URL('./dist/index.html', import.meta.url), 'utf8');
+for (const id of ['about','work','contact']) assert(html.includes(`id="${id}"`), `Missing destination ${id}`);
+for (const url of ['https://vimeo.com/716265249','https://vimeo.com/657215570','https://www.instagram.com/hostlester/']) assert(html.includes(url), `Missing verified link ${url}`);
+for (const match of html.matchAll(/(?:src|href)="(assets\/[^"?#]+)"/g)) assert(existsSync(new URL(`./dist/${match[1]}`, import.meta.url)), `Missing asset ${match[1]}`);
+assert(!/\b(?:1000\+|award-winning|five-star|5-star)\b/i.test(html), 'Unsupported marketing claim');
+assert(html.includes('id="inquiry-form"'), 'Missing client inquiry form');
+for (const name of ['name', 'email', 'eventType', 'eventDate', 'message']) assert(html.includes(`name="${name}"`), `Missing inquiry field: ${name}`);
+assert(html.includes('prefers-reduced-motion') || readFileSync(new URL('./dist/style.css', import.meta.url),'utf8').includes('prefers-reduced-motion'));
+console.log('PASS: sections, verified event links, local assets, claim guard, reduced-motion support');
