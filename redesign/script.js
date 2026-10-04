@@ -25,11 +25,18 @@ const cueTitles = ['The entrance', 'Introducing the host', 'A round of applause'
 const rsNum = $('#rs-num'), rsTitle = $('#rs-title'), rsProgress = $('#rs-progress');
 const navLinks = $$('.nav a'), rsLinks = $$('.rs-list a');
 let currentCue = 0;
+const form = $('#inquiry-form');
+const rsToggle = $('#rs-toggle'), rsList = $('#rs-list');
+const setRunsheet = open => { rsList.hidden = !open; rsToggle.setAttribute('aria-expanded', String(open)); };
 
 function onScroll() {
   const y = scrollY;
   header.classList.toggle('is-scrolled', y > 24);
-  document.body.classList.toggle('show-rs', y > innerHeight * 0.4);
+  // Hide the floating pill over the inquiry form so it never covers a field.
+  const formRect = form.getBoundingClientRect();
+  const overForm = formRect.top < innerHeight && formRect.bottom > 0;
+  document.body.classList.toggle('show-rs', y > innerHeight * 0.4 && !overForm);
+  if (overForm) setRunsheet(false);
   const probe = header.offsetHeight / 2;
   const under = themed.find(el => { const r = el.getBoundingClientRect(); return r.top <= probe && r.bottom > probe; });
   const theme = under?.dataset.theme;
@@ -66,8 +73,6 @@ setInterval(() => {
   clock.textContent = [s / 3600, (s / 60) % 60, s % 60].map(n => String(Math.floor(n)).padStart(2, '0')).join(':');
 }, 1000);
 
-const rsToggle = $('#rs-toggle'), rsList = $('#rs-list');
-const setRunsheet = open => { rsList.hidden = !open; rsToggle.setAttribute('aria-expanded', String(open)); };
 rsToggle.addEventListener('click', () => setRunsheet(rsList.hidden));
 rsLinks.forEach(a => a.addEventListener('click', () => setRunsheet(false)));
 document.addEventListener('click', e => { if (!e.target.closest('#runsheet')) setRunsheet(false); });
@@ -249,7 +254,6 @@ if (finePointer && !reduceMotion) {
 /* ---------- Inquiry form + live programme ---------- */
 const bookingEmail = (window.PORTFOLIO_CONFIG?.inquiryEmail || '').trim();
 const emailReady = /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(bookingEmail) && !/[\r\n?&#]/.test(bookingEmail);
-const form = $('#inquiry-form');
 const submit = $('#inquiry-submit');
 const status = $('#inquiry-status');
 const helper = $('#inquiry-help');
