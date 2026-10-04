@@ -1,0 +1,9 @@
+{
+  "name": "lester-events-host-redesign",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node serve.mjs",
+    "dev": "node serve.mjs"
+  }
+}
