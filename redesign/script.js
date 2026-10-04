@@ -41,7 +41,6 @@ function onScroll() {
   const under = themed.find(el => { const r = el.getBoundingClientRect(); return r.top <= probe && r.bottom > probe; });
   const theme = under?.dataset.theme;
   header.classList.toggle('is-light', theme === 'light');
-  header.classList.toggle('is-orange', theme === 'orange');
 
   let active = 1;
   for (const el of cues) if (el.getBoundingClientRect().top <= innerHeight * 0.45) active = +el.dataset.cue;
@@ -96,7 +95,7 @@ let lastPointer = 0, energyBoost = 0, heroVisible = true, lastMove = { x: 0, y: 
 function homeSpot(t) {
   const r = lit.getBoundingClientRect();
   const mobile = innerWidth <= 860;
-  const cx = r.width * (mobile ? 0.3 : 0.24), cy = r.height * (mobile ? 0.36 : 0.36);
+  const cx = r.width * 0.3, cy = r.height * 0.36;
   return { x: cx + Math.sin(t / 2100) * r.width * 0.07, y: cy + Math.cos(t / 2900) * r.height * 0.06 };
 }
 
