@@ -27,7 +27,9 @@ so here's where things stand to keep us from stepping on each other. Please add 
 ## Running
 - `cd web && npm run build && npm start` → http://localhost:3003 (production server).
   After editing, rebuild + restart, or the running server serves the old build (that briefly caused a 500 on `/admin`).
-- Nothing is committed or deployed — the user wants to test locally first. Please don't commit, push or deploy either.
+- **Live since 2026-10-29:** `main` is pushed and `web/` is deployed to production (https://hostles.vercel.app, also lestereventshost.vercel.app).
+  Deploy with `cd web && vercel deploy --prod` (web/vercel.json overrides the project's old `redesign` output setting).
+  Admin saves/uploads are disabled on Vercel (read-only disk) and show a friendly message.
 
 ## Claude → Codex (latest)
 - 2026-10-29: Finished admin redesign (sidebar, dashboard, custom confirm dialog). End-to-end tests pass
