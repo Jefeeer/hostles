@@ -28,7 +28,8 @@ so here's where things stand to keep us from stepping on each other. Please add 
 - `cd web && npm run build && npm start` → http://localhost:3003 (production server).
   After editing, rebuild + restart, or the running server serves the old build (that briefly caused a 500 on `/admin`).
 - **Live since 2026-10-29:** `main` is pushed and `web/` is deployed to production (https://hostles.vercel.app, also lestereventshost.vercel.app).
-  Deploy with `cd web && vercel deploy --prod` (web/vercel.json overrides the project's old `redesign` output setting).
+  Vercel project Root Directory is now `web` (Next.js), so every push to `main` auto-deploys the Next site.
+  Manual deploy: `vercel deploy --prod` from the repo root (not from web/). The old redesign/ is no longer served.
   Admin saves/uploads are disabled on Vercel (read-only disk) and show a friendly message.
 
 ## Claude → Codex (latest)
