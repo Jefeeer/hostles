@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hostles.vercel.app/sitemap.xml

@@ -1,0 +1,31 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://hostles.vercel.app/#website",
+      "url": "https://hostles.vercel.app/",
+      "name": "Lester Events Host",
+      "inLanguage": "en-PH",
+      "publisher": { "@id": "https://hostles.vercel.app/#business" }
+    },
+    {
+      "@type": ["ProfessionalService", "Organization"],
+      "@id": "https://hostles.vercel.app/#business",
+      "name": "Lester Events Host",
+      "alternateName": "Mark Lester S. Agellon",
+      "url": "https://hostles.vercel.app/",
+      "email": "mlagellon@gmail.com",
+      "logo": "https://hostles.vercel.app/assets/lester-script-orange.png",
+      "image": "https://hostles.vercel.app/assets/lester-events-host-social.jpg",
+      "description": "Professional events host and voice-over talent for weddings, corporate occasions and private celebrations.",
+      "areaServed": [
+        { "@type": "City", "name": "Tagaytay" },
+        { "@type": "AdministrativeArea", "name": "Cavite" },
+        { "@type": "AdministrativeArea", "name": "Batangas" }
+      ],
+      "knowsAbout": ["Wedding hosting", "Corporate event hosting", "Private event hosting", "Voice-over"],
+      "sameAs": ["https://www.facebook.com/LesterEventsHost", "https://www.instagram.com/hostlester/", "https://www.tiktok.com/@hostlester"]
+    }
+  ]
+}
