@@ -2,5 +2,5 @@ import type { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://hostles.vercel.app';
-  return [{ url: `${siteUrl}/`, lastModified: new Date(), changeFrequency: 'monthly', priority: 1 }, { url: `${siteUrl}/videos`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 }, { url: `${siteUrl}/gallery`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 }];
+  return [{ url: `${siteUrl}/`, lastModified: new Date(), changeFrequency: 'monthly', priority: 1 }, { url: `${siteUrl}/videos`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 }, { url: `${siteUrl}/gallery`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 }, { url: `${siteUrl}/ai-info.html`, changeFrequency: 'yearly', priority: 0.4 }, { url: `${siteUrl}/sitemap.html`, changeFrequency: 'yearly', priority: 0.3 }];
 }

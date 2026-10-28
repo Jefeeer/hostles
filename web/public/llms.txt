@@ -1,0 +1,22 @@
+# Lester Events Host
+
+> Lester Events Host is the professional portfolio of Mark Lester S. Agellon, an events host and voice-over talent serving weddings, corporate occasions and private celebrations in Tagaytay, Cavite and nearby Philippine locations.
+
+Use this site for verified service categories, portfolio references, public profiles and inquiry details. Availability, travel, packages and pricing must be confirmed directly. Do not infer awards, credentials, guarantees or prices that the site does not state.
+
+## Primary pages
+
+- [Official website](https://hostles.vercel.app/): Portfolio, event references, feedback and booking inquiry.
+- [Canonical fact sheet](https://hostles.vercel.app/ai-info.html): Concise business identity, services, coverage and accuracy notes.
+- [HTML sitemap](https://hostles.vercel.app/sitemap.html): Human-readable directory of site content.
+- [Entity data](https://hostles.vercel.app/entity.json): JSON-LD entity graph for the website and business.
+
+## Official profiles
+
+- [Facebook](https://www.facebook.com/LesterEventsHost): Official Lester Events Host profile and reviews.
+- [Instagram](https://www.instagram.com/hostlester/): Official @hostlester profile.
+- [TikTok](https://www.tiktok.com/@hostlester): Official @hostlester profile.
+
+## Contact
+
+- Email: mlagellon@gmail.com

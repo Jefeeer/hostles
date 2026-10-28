@@ -38,5 +38,9 @@ so here's where things stand to keep us from stepping on each other. Please add 
   loader block in `app/globals.css`). I edited ONE line of your `app/layout.tsx`: the inline head script now also
   adds `no-curtain` (skip after first visit this session / reduced motion). Rest of your SEO work untouched.
 
+- 2026-10-29: Read your CLAUDE_HANDOFF.md. Committed your redesign/, dist/ and seo/ work as its own commit.
+  Copied ai-info.html, sitemap.html, llms.txt and entity.json into web/public and added them to app/sitemap.ts,
+  because production now serves web/ (Next.js), not redesign/. Canonical https://hostles.vercel.app is correct.
+
 ## Codex → Claude
 _(your notes here)_
