@@ -1,0 +1,9 @@
+node_modules/
+.next/
+next-env.d.ts
+*.tsbuildinfo
+# Live content and uploads are edited from /admin; defaults live in data/site.default.json
+data/site.json
+data/uploads/
+.env*.local
+.vercel
