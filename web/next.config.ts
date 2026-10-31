@@ -6,6 +6,8 @@ const nextConfig: NextConfig = {
   cacheComponents: false,
   // PGlite ships wasm + data files; load it from node_modules instead of bundling (demo mode only).
   serverExternalPackages: ["@electric-sql/pglite"],
+  // The sign-in page is /login; common guesses go there too.
+  redirects: async () => ["/signin", "/sign-in", "/admin"].map((source) => ({ source, destination: "/login", permanent: false })),
   experimental: {
     // Two root layouts (public site + portal) need a global 404: src/app/global-not-found.tsx.
     globalNotFound: true,
