@@ -1,0 +1,165 @@
+{
+  "meta": {
+    "title": "Lester Events Host",
+    "description": "Lester Events Host — events host and voice-over talent for weddings, corporate occasions and private celebrations in Tagaytay, Cavite and beyond."
+  },
+  "logo": "/assets/lester-script-orange.png",
+  "nav": {
+    "about": "About Me",
+    "videos": "Videos",
+    "feedback": "Feedback",
+    "gallery": "Gallery",
+    "inquiry": "Inquiry"
+  },
+  "socials": {
+    "facebook": "https://www.facebook.com/LesterEventsHost",
+    "instagram": "https://www.instagram.com/hostlester/",
+    "tiktok": "https://www.tiktok.com/@hostlester"
+  },
+  "cover": {
+    "layout": "split",
+    "photo": "/assets/lester-portrait.jpg",
+    "eyebrow": "Events Host & Voice-over",
+    "title": "Lester",
+    "lead": "Weddings, corporate occasions and private celebrations."
+  },
+  "about": {
+    "photo": "/assets/lester-on-stage.jpg",
+    "eyebrow": "About Me",
+    "heading": "Mark Lester S. Agellon",
+    "body": "An events host and voice-over talent based in Tagaytay and Cavite. Known for a well-modulated voice and a thoughtful program flow, from the first “good evening” to the last song.",
+    "partnersLabel": "Partner suppliers",
+    "partners": [
+      {
+        "name": "Freshminds Photography",
+        "logo": ""
+      },
+      {
+        "name": "Mavis Catering",
+        "logo": ""
+      },
+      {
+        "name": "Mahogany Place Tagaytay",
+        "logo": ""
+      },
+      {
+        "name": "Kasalang Tagaytay",
+        "logo": ""
+      },
+      {
+        "name": "Jennifer Wedding & Events",
+        "logo": ""
+      }
+    ]
+  },
+  "videos": {
+    "eyebrow": "Videos",
+    "heading": "On the mic",
+    "facebookLabel": "Watch this in Facebook",
+    "moreLabel": "See More >>>",
+    "pageEyebrow": "Videos",
+    "pageHeading": "All videos",
+    "items": [
+      {
+        "title": "Sample video 1",
+        "place": "Venue, Tagaytay",
+        "src": "/assets/videos/sample-1.mp4",
+        "poster": "/assets/erick-shayne.jpg",
+        "facebook": "https://www.facebook.com/LesterEventsHost/videos"
+      },
+      {
+        "title": "Sample video 2",
+        "place": "Venue, Cavite",
+        "src": "/assets/videos/sample-2.mp4",
+        "poster": "/assets/allen-khrishia.jpg",
+        "facebook": "https://www.facebook.com/LesterEventsHost/videos"
+      },
+      {
+        "title": "Sample video 3",
+        "place": "Venue, Batangas",
+        "src": "/assets/videos/sample-1.mp4",
+        "poster": "/assets/lester-on-stage.jpg",
+        "facebook": "https://www.facebook.com/LesterEventsHost/videos"
+      },
+      {
+        "title": "Sample video 4",
+        "place": "Venue, Tagaytay",
+        "src": "/assets/videos/sample-2.mp4",
+        "poster": "/assets/lester-portrait.jpg",
+        "facebook": "https://www.facebook.com/LesterEventsHost/videos"
+      }
+    ]
+  },
+  "feedback": {
+    "eyebrow": "Feedback",
+    "heading": "Kind words",
+    "percent": "100%",
+    "statLabel": "recommend Lester · 37 Facebook reviews →",
+    "url": "https://www.facebook.com/LesterEventsHost/reviews",
+    "items": [
+      {
+        "name": "Paulene Balgoma-Lardizabal",
+        "event": "Wedding",
+        "photo": "/assets/allen-khrishia.jpg",
+        "text": "We received all positive feedback from our guests."
+      },
+      {
+        "name": "Client name",
+        "event": "Wedding",
+        "photo": "/assets/erick-shayne.jpg",
+        "text": "Placeholder: Lester to supply this client's feedback and photo. Longer feedback like this one is shortened to the first 100 characters with a Read more link, so every card stays the same tidy size."
+      },
+      {
+        "name": "Client name",
+        "event": "Corporate event",
+        "photo": "/assets/lester-on-stage.jpg",
+        "text": "Placeholder: Lester to supply this client's feedback and photo."
+      }
+    ]
+  },
+  "gallery": {
+    "eyebrow": "Gallery",
+    "heading": "Around the area",
+    "moreLabel": "View More >>>",
+    "pageEyebrow": "Gallery",
+    "pageHeading": "All photos",
+    "items": [
+      {
+        "area": "Tagaytay",
+        "src": "/assets/allen-khrishia.jpg",
+        "alt": "Allen and Khrishia walking through a garden at Chateau Trouvaille"
+      },
+      {
+        "area": "Tagaytay",
+        "src": "/assets/lester-portrait.jpg",
+        "alt": "Lester in a dark suit at an event"
+      },
+      {
+        "area": "Cavite",
+        "src": "/assets/erick-shayne.jpg",
+        "alt": "Erick and Shayne on a wrought-iron staircase at Antigo de la Cumbre"
+      },
+      {
+        "area": "Batangas",
+        "src": "/assets/lester-on-stage.jpg",
+        "alt": "Lester hosting on stage"
+      }
+    ]
+  },
+  "inquiry": {
+    "eyebrow": "Inquiry",
+    "heading": "Check availability",
+    "email": "mlagellon@gmail.com",
+    "eventTypes": [
+      "Wedding",
+      "Corporate event",
+      "Private celebration",
+      "Voice-over",
+      "Other"
+    ],
+    "submitLabel": "Send inquiry"
+  },
+  "footer": {
+    "copyright": "Lester Events Host"
+  }
+}

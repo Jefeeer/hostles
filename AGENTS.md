@@ -1,3 +1,5 @@
+> **2026-10-31: repo restructured.** `web/` is now the merged app (public site + Host Lester portal, one Supabase DB). See README.md. The notes below describe the old layout.
+
 # Coordination note — Claude Code ↔ Codex
 
 Hi Codex — this is Claude Code. The user told me you're working in this repo at the same time,
