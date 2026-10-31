@@ -7,8 +7,10 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
+import { PageHeader } from "@/components/bits";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { ConfirmContent } from "@/components/confirm-button";
+import { Dialog } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import type { Site } from "@/lib/site";
@@ -16,7 +18,7 @@ import { cn } from "@/lib/utils";
 import { prepareUpload, resetSite, saveSite, uploadDemoMedia } from "./actions";
 
 type Path = (string | number)[];
-type Ask = { title: string; message: string; confirm: string };
+type Ask = { title: string; message: string; confirm: string; restore?: boolean };
 type Ctx = { site: Site; set: (path: Path, value: unknown) => void; go: (tab: string) => void; ask: (a: Ask) => Promise<boolean> };
 const Editor = createContext<Ctx>(null!);
 
@@ -214,7 +216,7 @@ function Overview() {
         {stats.map(([label, n, sub, tab, Icon]) => (
           <button key={label} onClick={() => go(tab)} className="rounded-xl border bg-card p-4 text-left transition-colors hover:border-brand/50">
             <span className="flex items-center gap-2 text-xs font-semibold tracking-wide text-muted-foreground uppercase"><Icon className="size-4 text-brand" />{label}</span>
-            <strong className="tabular mt-1.5 block text-2xl font-bold">{n}</strong>
+            <strong className="tabular mt-2 block font-display text-[40px] leading-none font-normal">{n}</strong>
             <small className={hintText}>{sub}</small>
           </button>
         ))}
@@ -400,7 +402,7 @@ export function SiteEditor({ initial }: { initial: Site }) {
     if (res.ok) { setSaved(site); toast.success(res.message); } else toast.error(res.message);
   });
   const onReset = async () => {
-    if (!(await ask({ title: "Restore the original website?", message: "Every part of the website goes back to how it was when it moved into this portal. Your edits will be replaced and this can’t be undone.", confirm: "Restore" }))) return;
+    if (!(await ask({ title: "Restore the original website?", message: "Every part of the website goes back to how it was when it moved into this portal. Your edits will be replaced and this can’t be undone.", confirm: "Restore", restore: true }))) return;
     start(async () => {
       const res = await resetSite();
       if (!res.ok) return void toast.error(res.message);
@@ -414,15 +416,16 @@ export function SiteEditor({ initial }: { initial: Site }) {
 
   return (
     <Editor.Provider value={{ site, go, ask, set: (path, value) => setSite((s) => setIn(s, path, value)) }}>
-      <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
-        <div className="min-w-0">
-          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Website</h1>
-          <p className="mt-1 text-sm text-muted-foreground">Change what visitors see on your public site. Nothing goes live until you press Save.</p>
-        </div>
-        <Button asChild variant="outline" className="h-9">
-          <a href={current.anchor ?? "/"} target="_blank" rel="noopener"><ExternalLink /> View live site</a>
-        </Button>
-      </div>
+      <PageHeader
+        crumb={`Website / ${current.name}`}
+        title={current.name === "Overview" ? "Your website" : current.name}
+        description={current.name === "Overview" ? "Change what visitors see on your public site. Nothing goes live until you press Save." : current.desc}
+        actions={
+          <Button asChild variant="outline" className="h-9">
+            <a href={current.anchor ?? "/"} target="_blank" rel="noopener"><ExternalLink /> Preview on site</a>
+          </Button>
+        }
+      />
 
       {/* Sticky so Save is always in reach; sits under the phone header. */}
       <div className="sticky top-[52px] z-20 -mx-4 mb-5 border-b bg-background/95 px-4 py-2.5 backdrop-blur sm:-mx-6 sm:px-6 lg:top-0 lg:-mx-8 lg:px-8">
@@ -445,7 +448,6 @@ export function SiteEditor({ initial }: { initial: Site }) {
       </div>
 
       <div className="mx-auto grid max-w-5xl gap-5">
-        {tab !== "Overview" && <p className="text-sm text-muted-foreground">{current.desc}</p>}
         <Body />
         <div className="flex justify-end">
           <Button variant="ghost" size="sm" className="text-muted-foreground" onClick={onReset} disabled={pending}><RotateCcw /> Restore original website</Button>
@@ -453,16 +455,8 @@ export function SiteEditor({ initial }: { initial: Site }) {
       </div>
 
       <Dialog open={!!dialog} onOpenChange={(open) => !open && closeDialog(false)}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>{dialog?.title}</DialogTitle>
-            <DialogDescription>{dialog?.message}</DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => closeDialog(false)}>Never mind</Button>
-            <Button variant="destructive" onClick={() => closeDialog(true)}>{dialog?.confirm}</Button>
-          </DialogFooter>
-        </DialogContent>
+        <ConfirmContent icon={dialog?.restore ? <RotateCcw /> : undefined} title={dialog?.title ?? ""} description={dialog?.message} confirmLabel={dialog?.confirm ?? "OK"}
+          onCancel={() => closeDialog(false)} onConfirm={() => closeDialog(true)} />
       </Dialog>
     </Editor.Provider>
   );

@@ -33,11 +33,13 @@ export function PaymentTag({ status }: { status: PaymentStatus }) {
   return <span className={cn("text-xs font-semibold", PAY_STYLE[status])}>{PAYMENT_STATUS_LABEL[status]}</span>;
 }
 
-export function PageHeader({ title, description, actions }: { title: ReactNode; description?: ReactNode; actions?: ReactNode }) {
+/** Page title in the hostles admin style: orange crumb, then a big uppercase Anton heading. */
+export function PageHeader({ title, description, actions, crumb }: { title: ReactNode; description?: ReactNode; actions?: ReactNode; crumb?: string }) {
   return (
-    <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+    <div className="mb-6 flex flex-wrap items-end justify-between gap-3 border-b pb-5">
       <div className="min-w-0">
-        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">{title}</h1>
+        <p className="mb-1.5 text-[11px] font-bold tracking-[0.18em] text-brand uppercase">Admin{crumb ?? (typeof title === "string" ? title : "") ? ` / ${crumb ?? title}` : ""}</p>
+        <h1 className="font-display text-[28px] leading-none tracking-[0.01em] uppercase sm:text-[40px]">{title}</h1>
         {description && <p className="mt-1 text-sm text-muted-foreground">{description}</p>}
       </div>
       {actions && <div className="flex flex-wrap items-center gap-2">{actions}</div>}
@@ -62,7 +64,7 @@ export function Stat({ label, value, sub, accent }: { label: string; value: Reac
   return (
     <div className={cn("rounded-xl border bg-card p-4", accent && "border-brand/40 bg-brand-soft/40")}>
       <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">{label}</p>
-      <p className="tabular mt-1.5 text-2xl font-bold tracking-tight">{value}</p>
+      <p className="tabular mt-2 font-display text-[34px] leading-none tracking-[0.01em]">{value}</p>
       {sub && <div className="mt-1 space-y-0.5">{sub}</div>}
     </div>
   );

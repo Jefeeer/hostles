@@ -45,7 +45,8 @@ export default async function DashboardPage() {
   return (
     <>
       <PageHeader
-        title={<>Magandang {now.getHours() < 12 ? "umaga" : now.getHours() < 18 ? "hapon" : "gabi"}, Lester</>}
+        crumb="Dashboard"
+        title="Welcome back, Sir Lester"
         description={format(now, "EEEE, MMMM d, yyyy")}
       />
 

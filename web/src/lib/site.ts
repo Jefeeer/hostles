@@ -1,4 +1,5 @@
 import "server-only";
+import { unstable_rethrow } from "next/navigation";
 import { cache } from "react";
 import { createServiceClient } from "@/lib/supabase/server";
 import { getSetting } from "./data";
@@ -29,8 +30,15 @@ export const SITE_KEY = "site";
 export const defaultSite = () => structuredClone(DEFAULT_SITE) as Site;
 
 // Public pages read with the service client (settings is admin-only under RLS); cached per request.
-export const getContent = cache(async (): Promise<Site> =>
-  getSetting<Site>(await createServiceClient(), SITE_KEY, defaultSite()));
+// If the database can't be reached (or isn't configured, e.g. a local build), show the original content.
+export const getContent = cache(async (): Promise<Site> => {
+  try {
+    return await getSetting<Site>(await createServiceClient(), SITE_KEY, defaultSite());
+  } catch (e) {
+    unstable_rethrow(e); // let Next.js internals (e.g. dynamic rendering signals) through
+    return defaultSite();
+  }
+});
 
 // Gallery photos grouped by area, keeping first-seen order; the first photo is the area's featured one.
 export const groupByArea = (items: Photo[]) =>

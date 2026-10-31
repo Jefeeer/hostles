@@ -66,3 +66,6 @@ export const KIND_LABEL: Record<PaymentKind, string> = {
   balance: "Balance",
   other: "Other",
 };
+
+/** Cookie that remembers whether the desktop sidebar is collapsed. */
+export const SIDEBAR_COOKIE = "hl_sidebar";

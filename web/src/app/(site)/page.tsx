@@ -6,7 +6,8 @@ import Loader from '@/components/site/Loader';
 import FeedbackCard from '@/components/site/FeedbackCard';
 import InquiryForm from '@/components/site/InquiryForm';
 
-export const dynamic = 'force-dynamic'; // admin edits show on the next page load
+// Cached; saving in the /website editor refreshes it right away (revalidatePath). Hourly refresh as a backstop.
+export const revalidate = 3600;
 
 const FEATURED = 4; // client brief: 4 featured videos on the home page
 

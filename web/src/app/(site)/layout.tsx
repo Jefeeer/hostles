@@ -3,8 +3,8 @@ import localFont from 'next/font/local';
 import { getContent } from '@/lib/site';
 import './site.css';
 
-const manrope = localFont({ src: './fonts/manrope.woff2', weight: '200 800', variable: '--font-manrope' });
-const anton = localFont({ src: './fonts/anton.woff2', variable: '--font-anton' });
+const manrope = localFont({ src: '../fonts/manrope.woff2', weight: '200 800', variable: '--font-manrope' });
+const anton = localFont({ src: '../fonts/anton.woff2', variable: '--font-anton' });
 
 export async function generateMetadata(): Promise<Metadata> {
   const { meta } = await getContent();

@@ -9,23 +9,23 @@ export type ThemeChoice = "light" | "dark" | "system";
 const KEY = "hl-theme";
 
 /**
- * Runs in <head> before first paint (no light/dark flash): applies the saved choice,
- * or the OS setting, and follows OS changes while on "system".
+ * Runs in <head> before first paint (no light/dark flash): applies the saved choice.
+ * Dark (the hostles admin look) is the default; "system" follows the OS and its changes.
  */
-export const THEME_SCRIPT = `(function(){try{var k="${KEY}",m=matchMedia("(prefers-color-scheme: dark)");function a(){var c=null;try{c=localStorage.getItem(k)}catch(e){}var d=c==="dark"||(c!=="light"&&m.matches);document.documentElement.dataset.theme=d?"dark":"light"}a();m.addEventListener("change",a);window.__hlApplyTheme=a}catch(e){}})()`;
+export const THEME_SCRIPT = `(function(){try{var k="${KEY}",m=matchMedia("(prefers-color-scheme: dark)");function a(){var c=null;try{c=localStorage.getItem(k)}catch(e){}var d=c!=="light"&&(c!=="system"||m.matches);document.documentElement.dataset.theme=d?"dark":"light"}a();m.addEventListener("change",a);window.__hlApplyTheme=a}catch(e){}})()`;
 
 function readChoice(): ThemeChoice {
   try {
     const c = localStorage.getItem(KEY);
-    return c === "light" || c === "dark" ? c : "system";
+    return c === "light" || c === "system" ? c : "dark";
   } catch {
-    return "system";
+    return "dark";
   }
 }
 
 function setChoice(c: ThemeChoice) {
   try {
-    if (c === "system") localStorage.removeItem(KEY);
+    if (c === "dark") localStorage.removeItem(KEY);
     else localStorage.setItem(KEY, c);
   } catch {}
   (window as unknown as { __hlApplyTheme?: () => void }).__hlApplyTheme?.();
@@ -39,7 +39,7 @@ const subscribeChoice = (cb: () => void) => {
 
 /** The theme actually showing, kept in sync with <html data-theme>. */
 function useResolvedTheme() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
   useEffect(() => {
     const el = document.documentElement;
     const read = () => setTheme(el.dataset.theme === "dark" ? "dark" : "light");
@@ -59,14 +59,14 @@ const OPTIONS = [
 
 /** Light / Dark / System switch (sidebar). */
 export function ThemeSwitch({ className }: { className?: string }) {
-  // Server doesn't know the saved choice: render "system", then the real one after hydration.
-  const choice = useSyncExternalStore(subscribeChoice, readChoice, () => "system" as ThemeChoice);
+  // Server doesn't know the saved choice: render the default, then the real one after hydration.
+  const choice = useSyncExternalStore(subscribeChoice, readChoice, () => "dark" as ThemeChoice);
   return (
-    <div role="radiogroup" aria-label="Theme" className={cn("grid grid-cols-3 gap-1 rounded-lg bg-sidebar-accent p-1", className)}>
+    <div role="radiogroup" aria-label="Theme" className={cn("grid grid-cols-3 gap-1 rounded-full bg-sidebar-accent p-1", className)}>
       {OPTIONS.map(({ value, label, icon: Icon }) => (
         <button key={value} type="button" role="radio" aria-checked={choice === value} title={label}
           onClick={() => setChoice(value)}
-          className="flex items-center justify-center gap-1.5 rounded-md py-1.5 text-xs font-medium text-sidebar-foreground/60 hover:text-sidebar-foreground aria-checked:bg-sidebar aria-checked:text-sidebar-foreground aria-checked:shadow-sm">
+          className="flex items-center justify-center gap-1.5 rounded-full py-1.5 text-xs font-medium text-sidebar-foreground/60 hover:text-sidebar-foreground aria-checked:bg-sidebar aria-checked:text-sidebar-foreground aria-checked:shadow-sm">
           <Icon className="size-3.5" /><span className="sr-only sm:not-sr-only">{label}</span>
         </button>
       ))}

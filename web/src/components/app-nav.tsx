@@ -43,13 +43,15 @@ const TABS = [
 
 const isActive = (path: string, href: string) => path === href || path.startsWith(`${href}/`);
 
-export function SideNav({ leads, onNavigate }: { leads: number; onNavigate?: () => void }) {
+export function SideNav({ leads, onNavigate, collapsed = false }: { leads: number; onNavigate?: () => void; collapsed?: boolean }) {
   const path = usePathname();
   return (
-    <nav aria-label="Main" className="flex flex-col gap-5">
+    <nav aria-label="Main" className={cn("flex flex-col", collapsed ? "gap-3" : "gap-5")}>
       {NAV_GROUPS.map((group) => (
         <div key={group.label}>
-          <p className="mb-1.5 px-3 text-[11px] font-bold tracking-[0.14em] text-sidebar-foreground/45 uppercase">{group.label}</p>
+          {collapsed
+            ? <hr className="mx-2 mb-3 border-sidebar-border" aria-label={group.label} />
+            : <p className="mb-2 px-3 text-[10px] font-bold tracking-[0.2em] text-sidebar-foreground/66 uppercase">{group.label}</p>}
           <ul className="flex flex-col gap-0.5">
             {group.items.map(({ href, label, hint, icon: Icon, external, badge }) => {
               const active = !external && isActive(path, href);
@@ -60,17 +62,25 @@ export function SideNav({ leads, onNavigate }: { leads: number; onNavigate?: () 
                     onClick={onNavigate}
                     {...(external && { target: "_blank", rel: "noopener" })}
                     aria-current={active ? "page" : undefined}
+                    title={collapsed ? label : undefined}
                     className={cn(
-                      "flex items-center gap-3 rounded-lg px-3 py-2 text-sidebar-foreground/75 transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground",
-                      "aria-[current=page]:bg-sidebar-accent aria-[current=page]:text-sidebar-foreground",
+                      // hostles admin: orange-tinted active row with an orange bar on the sidebar edge.
+                      "relative flex items-center gap-3 rounded-[10px] py-2.5 text-sidebar-foreground/66 transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground",
+                      // Fixed tint (not brand-soft): the sidebar is black in both themes.
+                      "aria-[current=page]:bg-[rgb(255_102_0/0.14)] aria-[current=page]:text-sidebar-foreground",
+                      collapsed ? "justify-center px-0 aria-[current=page]:before:-left-3" : "px-3",
+                      "aria-[current=page]:before:absolute aria-[current=page]:before:inset-y-2 aria-[current=page]:before:-left-4 aria-[current=page]:before:w-[3px] aria-[current=page]:before:rounded-r aria-[current=page]:before:bg-brand",
                     )}
                   >
                     <Icon className={cn("size-[18px] shrink-0", active && "text-brand")} />
-                    <span className="grid min-w-0 flex-1 leading-tight">
-                      <span className="truncate text-sm font-medium">{label}</span>
-                      <span className="truncate text-[11px] text-sidebar-foreground/50">{hint}</span>
-                    </span>
-                    {badge === "leads" && leads > 0 && (
+                    {collapsed ? <span className="sr-only">{label}</span> : (
+                      <span className="grid min-w-0 flex-1 leading-tight">
+                        <span className="truncate text-sm font-semibold">{label}</span>
+                        <span className="truncate text-[11px] text-sidebar-foreground/50">{hint}</span>
+                      </span>
+                    )}
+                    {badge === "leads" && leads > 0 && collapsed && <span className="absolute top-1.5 right-2 size-2 rounded-full bg-brand" aria-label={`${leads} open leads`} />}
+                    {badge === "leads" && leads > 0 && !collapsed && (
                       <span className="tabular rounded-full bg-brand px-1.5 py-0.5 text-[11px] font-bold text-stage" title={`${leads} open ${leads === 1 ? "lead" : "leads"}`}>
                         {leads}
                       </span>

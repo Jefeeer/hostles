@@ -3,7 +3,7 @@ import { getContent } from '@/lib/site';
 import SiteHeader from '@/components/site/SiteHeader';
 import VideoCard from '@/components/site/VideoCard';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600; // see page.tsx
 
 export async function generateMetadata(): Promise<Metadata> {
   const site = await getContent();
