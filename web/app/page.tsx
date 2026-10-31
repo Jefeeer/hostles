@@ -63,6 +63,9 @@ export default async function Home() {
           <h2 id="feedback-title">{feedback.heading}</h2>
           <a className="stat" href={feedback.url} target="_blank" rel="noopener noreferrer">
             <span className="stat-quote" aria-hidden="true">&ldquo;</span>
+            <span className="stat-bars" aria-hidden="true">
+              {[25, 50, 75, 100].map((t) => <span key={t} className={(parseFloat(feedback.percent) || 0) >= t ? 'on' : ''} style={{ height: `${t}%` }} />)}
+            </span>
             <span className="stat-num">{feedback.percent}</span>
             <span className="stat-label">{feedback.statLabel}</span>
           </a>
