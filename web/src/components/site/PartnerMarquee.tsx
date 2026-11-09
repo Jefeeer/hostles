@@ -22,9 +22,12 @@ function Row({ partners, dir }: { partners: Partner[]; dir: 1 | -1 }) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const setWidth = () => (el.children[1] as HTMLElement).offsetLeft; // one copy + gap
-    const wrap = (x: number) => { const w = setWidth(); return x >= 2 * w ? x - w : x < w ? x + w : x; };
-    let pos = setWidth(), paused = false, hovered = false, timer = 0, raf = 0;
+    // Width of one copy + gap. Measured once and on resize: reading layout every frame forces a reflow per frame.
+    let w = 0;
+    const measure = () => { w = (el.children[1] as HTMLElement).offsetLeft; };
+    measure();
+    const wrap = (x: number) => (x >= 2 * w ? x - w : x < w ? x + w : x);
+    let pos = w, paused = false, hovered = false, timer = 0, raf = 0;
     el.scrollLeft = pos;
 
     const pause = () => { paused = true; clearTimeout(timer); };
@@ -53,8 +56,20 @@ function Row({ partners, dir }: { partners: Partner[]; dir: 1 | -1 }) {
       ['wheel', nudge], ['focusin', pause], ['focusout', resume],
     ] as [string, EventListener][];
     on.forEach(([t, f]) => el.addEventListener(t, f, { passive: true }));
-    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) raf = requestAnimationFrame(tick);
-    return () => { cancelAnimationFrame(raf); clearTimeout(timer); on.forEach(([t, f]) => el.removeEventListener(t, f)); };
+
+    // Animate only while the row is on screen, so it costs nothing during page load or once scrolled past.
+    const resize = new ResizeObserver(() => { const old = w; measure(); pos = wrap(pos - old + w); });
+    resize.observe(el);
+    const motion = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const seen = new IntersectionObserver(([e]) => {
+      cancelAnimationFrame(raf);
+      if (e.isIntersecting && motion) { pos = wrap(el.scrollLeft); raf = requestAnimationFrame(tick); }
+    });
+    seen.observe(el);
+    return () => {
+      cancelAnimationFrame(raf); clearTimeout(timer); seen.disconnect(); resize.disconnect();
+      on.forEach(([t, f]) => el.removeEventListener(t, f));
+    };
   }, [dir]);
 
   return (
@@ -62,7 +77,7 @@ function Row({ partners, dir }: { partners: Partner[]; dir: 1 | -1 }) {
       {[0, 1, 2].map((copy) => (
         <ul key={copy} className="partner-list" aria-hidden={copy > 0 || undefined}>
           {partners.map((p, i) => (
-            <li key={i}>{p.logo ? <img src={p.logo} alt={copy ? '' : p.name} draggable={false} /> : p.name}</li>
+            <li key={i}>{p.logo ? <img src={p.logo} alt={copy ? '' : p.name} loading="lazy" draggable={false} /> : p.name}</li>
           ))}
         </ul>
       ))}
