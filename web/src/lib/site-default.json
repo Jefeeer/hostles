@@ -18,37 +18,202 @@
   },
   "cover": {
     "layout": "split",
-    "photo": "/assets/lester-portrait.jpg",
+    "photo": "/assets/lester-cover-2026.jpg",
     "eyebrow": "Events Host & Voice-over",
     "title": "Lester",
-    "lead": "Weddings, corporate occasions and private celebrations."
+    "lead": "Weddings, corporate occasions and private celebrations.",
+    "focus": "center 20%"
   },
   "about": {
     "photo": "/assets/lester-on-stage.jpg",
     "eyebrow": "About Me",
-    "heading": "Mark Lester S. Agellon",
-    "body": "An events host and voice-over talent based in Tagaytay and Cavite. Known for a well-modulated voice and a thoughtful program flow, from the first “good evening” to the last song.",
+    "heading": "Elegant. Effortless. Always Engaging.",
+    "body": "Hello, I’m Lester — a professional wedding and events host who believes that every celebration deserves to be meaningful, seamless, and unforgettable.\n\nSince 2014, I’ve had the privilege of hosting weddings and special occasions, creating an atmosphere where genuine emotions, joyful moments, and meaningful connections take center stage. My approach combines elegance and professionalism with a warm, engaging personality, ensuring that every celebration feels natural, personal, and enjoyable.\n\nFor me, hosting is more than simply guiding a program. It’s about understanding each couple’s story, setting the right tone for their celebration, and bringing people together through moments they will cherish long after the event.\n\nWhether it’s a heartfelt exchange of vows, a room filled with laughter, or a celebration shared with the people who matter most, I strive to make every moment flow effortlessly while allowing your story to shine.\n\nYour wedding is uniquely yours, and it deserves a host who understands that.\n\nLet’s create a celebration that feels just like you — elegant, meaningful, and truly unforgettable.",
     "partnersLabel": "Partner suppliers",
     "partners": [
       {
+        "name": "Alora Countryside Garden",
+        "logo": "/assets/partners/alora-countryside-garden.jpg"
+      },
+      {
+        "name": "Alta Terra Hotel Tagaytay",
+        "logo": "/assets/partners/alta-terra-hotel-tagaytay.jpg"
+      },
+      {
+        "name": "Artuz 101 Professional Lights and Sounds",
+        "logo": "/assets/partners/artuz-101-professional-lights-and-sounds.jpg"
+      },
+      {
+        "name": "AsriBali Countryside Garden",
+        "logo": "/assets/partners/asribali-countryside-garden.jpg"
+      },
+      {
+        "name": "Aubrey Tiosen Photo",
+        "logo": "/assets/partners/aubrey-tiosen-photo.jpg"
+      },
+      {
+        "name": "Be Lovely Events",
+        "logo": "/assets/partners/be-lovely-events.jpg"
+      },
+      {
+        "name": "Beat Audio Lights and Sounds",
+        "logo": "/assets/partners/beat-audio-lights-and-sounds.jpg"
+      },
+      {
+        "name": "Carera Pro Studios",
+        "logo": "/assets/partners/carera-pro-studios.jpg"
+      },
+      {
+        "name": "Casa de Corazon the Caterer",
+        "logo": "/assets/partners/casa-de-corazon-the-caterer.jpg"
+      },
+      {
+        "name": "CC Events Management and Services",
+        "logo": "/assets/partners/cc-events-management-and-services.jpg"
+      },
+      {
+        "name": "DJ Hayme Concepcion",
+        "logo": "/assets/partners/dj-hayme-concepcion.jpg"
+      },
+      {
+        "name": "DJ Pey Bacos",
+        "logo": "/assets/partners/dj-pey-bacos.jpg"
+      },
+      {
+        "name": "DT Lights and Sounds",
+        "logo": "/assets/partners/dt-lights-and-sounds.jpg"
+      },
+      {
+        "name": "Elia Events Place Tagaytay",
+        "logo": "/assets/partners/elia-events-place-tagaytay.jpg"
+      },
+      {
+        "name": "EMS by Anna Sotto",
+        "logo": "/assets/partners/ems-by-anna-sotto.jpg"
+      },
+      {
+        "name": "Events by Rachelle",
+        "logo": "/assets/partners/events-by-rachelle.jpg"
+      },
+      {
+        "name": "Farm Hills Garden",
+        "logo": "/assets/partners/farm-hills-garden.jpg"
+      },
+      {
         "name": "Freshminds Photography",
-        "logo": ""
+        "logo": "/assets/partners/freshminds-photography.jpg"
+      },
+      {
+        "name": "Go Events",
+        "logo": "/assets/partners/go-events.jpg"
+      },
+      {
+        "name": "Hacienda Solange",
+        "logo": "/assets/partners/hacienda-solange.jpg"
+      },
+      {
+        "name": "Hillcreek Gardens Tagaytay",
+        "logo": "/assets/partners/hillcreek-gardens-tagaytay.jpg"
+      },
+      {
+        "name": "Jardin de Milagros Tagaytay",
+        "logo": "/assets/partners/jardin-de-milagros-tagaytay.jpg"
+      },
+      {
+        "name": "Jennifer Wedding and Events",
+        "logo": "/assets/partners/jennifer-wedding-and-events.jpg"
+      },
+      {
+        "name": "Jovens Catering Services",
+        "logo": "/assets/partners/jovens-catering-services.jpg"
+      },
+      {
+        "name": "JRX Lights and Sounds",
+        "logo": "/assets/partners/jrx-lights-and-sounds.jpg"
+      },
+      {
+        "name": "Juliann Charlize The Caterer",
+        "logo": "/assets/partners/juliann-charlize-the-caterer.jpg"
+      },
+      {
+        "name": "Kasalang Tagaytay EXPO",
+        "logo": "/assets/partners/kasalang-tagaytay-expo.jpg"
+      },
+      {
+        "name": "Kayama Mountain Resort and Events Place",
+        "logo": "/assets/partners/kayama-mountain-resort-and-events-place.jpg"
+      },
+      {
+        "name": "Let’s Plan It Together Event Services",
+        "logo": "/assets/partners/lets-plan-it-together-event-services.jpg"
+      },
+      {
+        "name": "Mariel’s Garden",
+        "logo": "/assets/partners/mariels-garden.jpg"
       },
       {
         "name": "Mavis Catering",
-        "logo": ""
+        "logo": "/assets/partners/mavis-catering.jpg"
       },
       {
-        "name": "Mahogany Place Tagaytay",
-        "logo": ""
+        "name": "Memory Lane Studios",
+        "logo": "/assets/partners/memory-lane-studios.jpg"
       },
       {
-        "name": "Kasalang Tagaytay",
-        "logo": ""
+        "name": "Niz Lights and Sounds",
+        "logo": "/assets/partners/niz-lights-and-sounds.jpg"
       },
       {
-        "name": "Jennifer Wedding & Events",
-        "logo": ""
+        "name": "Rommel Espera Events Management",
+        "logo": "/assets/partners/rommel-espera-events-management.jpg"
+      },
+      {
+        "name": "Serenescapes Bed and Breakfast",
+        "logo": "/assets/partners/serenescapes-bed-and-breakfast.jpg"
+      },
+      {
+        "name": "Soiree Events Place",
+        "logo": "/assets/partners/soiree-events-place.jpg"
+      },
+      {
+        "name": "STAT Events and Trends",
+        "logo": "/assets/partners/stat-events-and-trends.jpg"
+      },
+      {
+        "name": "Storm Audio Lights and Sounds",
+        "logo": "/assets/partners/storm-audio-lights-and-sounds.jpg"
+      },
+      {
+        "name": "Studio Axend",
+        "logo": "/assets/partners/studio-axend.jpg"
+      },
+      {
+        "name": "The Masterpiece Music Ensemble",
+        "logo": "/assets/partners/the-masterpiece-music-ensemble.jpg"
+      },
+      {
+        "name": "Totally Mesmerized Choir and Acoustic Band",
+        "logo": "/assets/partners/totally-mesmerized-choir-and-acoustic-band.jpg"
+      },
+      {
+        "name": "Towns Delight Catering and Events",
+        "logo": "/assets/partners/towns-delight-catering-and-events.jpg"
+      },
+      {
+        "name": "Trabiesa Tagaytay",
+        "logo": "/assets/partners/trabiesa-tagaytay.jpg"
+      },
+      {
+        "name": "Vanity Creation by Ricee A",
+        "logo": "/assets/partners/vanity-creation-by-ricee-a.jpg"
+      },
+      {
+        "name": "Viridis Countryside Garden",
+        "logo": "/assets/partners/viridis-countryside-garden.jpg"
+      },
+      {
+        "name": "Wedding Image Photography",
+        "logo": "/assets/partners/wedding-image-photography.jpg"
       }
     ]
   },
@@ -61,31 +226,17 @@
     "pageHeading": "All videos",
     "items": [
       {
-        "title": "Sample video 1",
-        "place": "Venue, Tagaytay",
-        "src": "/assets/videos/sample-1.mp4",
-        "poster": "/assets/erick-shayne.jpg",
+        "title": "Host Lester 2026 Video Reel",
+        "place": "Opening reel",
+        "src": "/assets/videos/reel-opening.mp4",
+        "poster": "/assets/videos/reel-opening.jpg",
         "facebook": "https://www.facebook.com/LesterEventsHost/videos"
       },
       {
-        "title": "Sample video 2",
-        "place": "Venue, Cavite",
-        "src": "/assets/videos/sample-2.mp4",
-        "poster": "/assets/allen-khrishia.jpg",
-        "facebook": "https://www.facebook.com/LesterEventsHost/videos"
-      },
-      {
-        "title": "Sample video 3",
-        "place": "Venue, Batangas",
-        "src": "/assets/videos/sample-1.mp4",
-        "poster": "/assets/lester-on-stage.jpg",
-        "facebook": "https://www.facebook.com/LesterEventsHost/videos"
-      },
-      {
-        "title": "Sample video 4",
-        "place": "Venue, Tagaytay",
-        "src": "/assets/videos/sample-2.mp4",
-        "poster": "/assets/lester-portrait.jpg",
+        "title": "Host Lester 2027 Video Reel",
+        "place": "Highlights reel",
+        "src": "/assets/videos/reel-2027.mp4",
+        "poster": "/assets/videos/reel-2027.jpg",
         "facebook": "https://www.facebook.com/LesterEventsHost/videos"
       }
     ]

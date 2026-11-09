@@ -1,6 +1,7 @@
 import { getContent, groupByArea } from '@/lib/site';
 import SiteHeader from '@/components/site/SiteHeader';
 import VideoCard from '@/components/site/VideoCard';
+import PartnerMarquee from '@/components/site/PartnerMarquee';
 import Socials from '@/components/site/Socials';
 import Loader from '@/components/site/Loader';
 import FeedbackCard from '@/components/site/FeedbackCard';
@@ -42,9 +43,7 @@ export default async function Home() {
         {about.partners.length > 0 && (
           <div className="wrap partners">
             <p className="eyebrow">{about.partnersLabel}</p>
-            <ul className="partner-list">
-              {about.partners.map((p, i) => <li key={i}>{p.logo ? <img src={p.logo} alt={p.name} loading="lazy" /> : p.name}</li>)}
-            </ul>
+            <PartnerMarquee partners={about.partners} label={about.partnersLabel} />
           </div>
         )}
       </section>

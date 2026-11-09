@@ -271,7 +271,7 @@ const TABS: Tab[] = [
       <Text label="Bio" path={["about", "body"]} multiline hint="Leave a blank line between paragraphs." />
       <Media label="Photo" path={["about", "photo"]} />
     </Group>
-    <Group title="Partner suppliers" note="Shown at the end of the About section. The name shows when there is no logo.">
+    <Group title="Partner suppliers" note="Shown at the end of the About section as two rows that slide in opposite directions (every other partner goes to the second row). Visitors can swipe each row. The name shows when there is no logo.">
       <Text label="Section label" path={["about", "partnersLabel"]} wide />
       <List path={["about", "partners"]} label="partner" blank={{ name: "", logo: "" }} title={(p) => p.name} thumb={(p) => p.logo}>
         {(b) => <><Text label="Name" path={[...b, "name"]} wide /><Media label="Logo (optional)" path={[...b, "logo"]} /></>}

@@ -1,2 +1,5 @@
 node_modules/
 .vercel/
+
+# Raw client asset drops (large originals; web-ready copies live in web/public/assets)
+Host Lester 2026-*/
