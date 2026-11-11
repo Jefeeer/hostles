@@ -31,7 +31,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="section section--light" id="about" aria-labelledby="about-title">
+      <section className="section" id="about" aria-labelledby="about-title">
         <div className="wrap about">
           <img src={about.photo} alt="" loading="lazy" />
           <div>
@@ -57,7 +57,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="section section--light" id="feedback" aria-labelledby="feedback-title">
+      <section className="section" id="feedback" aria-labelledby="feedback-title">
         <div className="wrap">
           <p className="eyebrow">{feedback.eyebrow}</p>
           <h2 id="feedback-title">{feedback.heading}</h2>
@@ -88,7 +88,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="section section--light" id="inquire" aria-labelledby="inquire-title">
+      <section className="section" id="inquire" aria-labelledby="inquire-title">
         <div className="wrap narrow">
           <p className="eyebrow">{inquiry.eyebrow}</p>
           <h2 id="inquire-title">{inquiry.heading}</h2>
