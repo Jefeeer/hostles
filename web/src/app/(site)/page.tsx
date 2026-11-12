@@ -4,8 +4,9 @@ import VideoCard from '@/components/site/VideoCard';
 import PartnerMarquee from '@/components/site/PartnerMarquee';
 import Socials from '@/components/site/Socials';
 import Loader from '@/components/site/Loader';
-import FeedbackCard from '@/components/site/FeedbackCard';
+import FeedbackCarousel from '@/components/site/FeedbackCarousel';
 import InquiryForm from '@/components/site/InquiryForm';
+import GalleryCarousel from '@/components/site/GalleryCarousel';
 
 // Cached; saving in the /website editor refreshes it right away (revalidatePath). Hourly refresh as a backstop.
 export const revalidate = 3600;
@@ -23,11 +24,11 @@ export default async function Home() {
 
     <main id="main">
       <section className={`cover cover--${cover.layout}`} id="top" aria-label={site.meta.title}>
-        <img className="cover-photo" src={cover.photo} alt="" style={{ objectPosition: cover.focus || "center 20%" }} />
+        <img className="cover-photo" src={cover.photo} alt="" fetchPriority="high" style={{ objectPosition: cover.focus || "center 20%" }} />
         <div className="cover-text">
-          <p className="eyebrow">{cover.eyebrow}</p>
+          {cover.eyebrow && <p className="eyebrow">{cover.eyebrow}</p>}
           <h1>{cover.title}</h1>
-          <p className="lead">{cover.lead}</p>
+          {cover.lead && <p className="lead">{cover.lead}</p>}
         </div>
       </section>
 
@@ -69,21 +70,19 @@ export default async function Home() {
             <span className="stat-num">{feedback.percent}</span>
             <span className="stat-label">{feedback.statLabel}</span>
           </a>
-          <div className="feedback-grid">{feedback.items.map((f, i) => <FeedbackCard key={i} item={f} />)}</div>
+          <FeedbackCarousel items={feedback.items} label={feedback.heading} />
         </div>
       </section>
 
-      <section className="section section--alt" id="gallery" aria-labelledby="gallery-title">
+      <section className="section" id="gallery" aria-label={gallery.heading}>
         <div className="wrap">
-          <p className="eyebrow">{gallery.eyebrow}</p>
-          <h2 id="gallery-title">{gallery.heading}</h2>
-          <div className="area-grid">
-            {groupByArea(gallery.items).map(([area, photos]) => (
-              <a className="area" key={area} href={`/gallery#${encodeURIComponent(area)}`} target="_blank" rel="noopener">
-                <img src={photos[0].src} alt={photos[0].alt} loading="lazy" /><span>{area}</span>
-              </a>
-            ))}
-          </div>
+          {groupByArea(gallery.items).map(([area, photos]) => (
+            <div className="gallery-block" key={area}>
+              <p className="eyebrow">{gallery.eyebrow}</p>
+              <h2>{area}</h2>
+              <GalleryCarousel label={area} photos={photos} />
+            </div>
+          ))}
           <a className="more" href="/gallery" target="_blank" rel="noopener">{gallery.moreLabel}</a>
         </div>
       </section>

@@ -17,15 +17,15 @@
     "tiktok": "https://www.tiktok.com/@hostlester"
   },
   "cover": {
-    "layout": "split",
+    "layout": "full",
     "photo": "/assets/lester-cover-2026.jpg",
     "eyebrow": "Events Host & Voice-over",
-    "title": "Lester",
-    "lead": "Weddings, corporate occasions and private celebrations.",
+    "title": "Host Lester",
+    "lead": "",
     "focus": "center 20%"
   },
   "about": {
-    "photo": "/assets/lester-on-stage.jpg",
+    "photo": "/assets/lester-hosting-mic.jpg",
     "eyebrow": "About Me",
     "heading": "Elegant. Effortless. Always Engaging.",
     "body": "Hello, I’m Lester — a professional wedding and events host who believes that every celebration deserves to be meaningful, seamless, and unforgettable.\n\nSince 2014, I’ve had the privilege of hosting weddings and special occasions, creating an atmosphere where genuine emotions, joyful moments, and meaningful connections take center stage. My approach combines elegance and professionalism with a warm, engaging personality, ensuring that every celebration feels natural, personal, and enjoyable.\n\nFor me, hosting is more than simply guiding a program. It’s about understanding each couple’s story, setting the right tone for their celebration, and bringing people together through moments they will cherish long after the event.\n\nWhether it’s a heartfelt exchange of vows, a room filled with laughter, or a celebration shared with the people who matter most, I strive to make every moment flow effortlessly while allowing your story to shine.\n\nYour wedding is uniquely yours, and it deserves a host who understands that.\n\nLet’s create a celebration that feels just like you — elegant, meaningful, and truly unforgettable.",
@@ -238,6 +238,13 @@
         "src": "/assets/videos/reel-2027.mp4",
         "poster": "/assets/videos/reel-2027.jpg",
         "facebook": "https://www.facebook.com/LesterEventsHost/videos"
+      },
+      {
+        "title": "Bingo Elimination Instructions",
+        "place": "Party games",
+        "src": "/assets/videos/bingo-elimination.mp4",
+        "poster": "/assets/videos/bingo-elimination.jpg",
+        "facebook": "https://www.facebook.com/LesterEventsHost/videos"
       }
     ]
   },
@@ -251,47 +258,75 @@
       {
         "name": "Paulene Balgoma-Lardizabal",
         "event": "Wedding",
-        "photo": "/assets/allen-khrishia.jpg",
-        "text": "We received all positive feedback from our guests."
+        "photo": "/assets/feedback/feedback-1.jpg",
+        "text": "Host lester, you must book him if may mga event kayo.. very responsive.. we received all positive feedback from our guests. Ang laki ng part nya sa wedding namen.. 🥰 Highly recommended"
       },
       {
-        "name": "Client name",
+        "name": "Veronica Yalung",
         "event": "Wedding",
-        "photo": "/assets/erick-shayne.jpg",
-        "text": "Placeholder: Lester to supply this client's feedback and photo. Longer feedback like this one is shortened to the first 100 characters with a Read more link, so every card stays the same tidy size."
+        "photo": "/assets/feedback/feedback-2.jpg",
+        "text": "Lester!! Our man!! Thank you so much for making our wedding celebration so lively, engaging and memorable! 🤍\n\nFrom the planning stage, you already made us feel so comfortable and at ease. We loved how you would share ideas and suggestions on how we could make the program more entertaining and enjoyable for everyone, while still making sure it felt like us.\n\nEverything flowed so seamlessly. There was never an awkward or dull moment and your energy stayed consistent from beginning to end. You knew exactly how to keep everyone engaged, entertained and excited throughout the program without making anything feel forced.\n\nYou were so flexible and accommodating with our requests and you adjusted so naturally whenever we wanted to change or add something last minute.\n\nSo many of our guests told us how much they loved you and how much they enjoyed the program and that says everything. 🥹\n\nWe truly loved working with you, Lester. Thank you for being such a big part of our wedding. We’re honestly going to miss working with you! 🤍"
       },
       {
-        "name": "Client name",
-        "event": "Corporate event",
-        "photo": "/assets/lester-on-stage.jpg",
-        "text": "Placeholder: Lester to supply this client's feedback and photo."
+        "name": "Mary Joy Casulocan Baes",
+        "event": "Wedding",
+        "photo": "/assets/feedback/feedback-3.jpg",
+        "text": "Sir Les was the host we chose on the list provided by our wedding planner. When we were just checking his portfolio, my husband and I both agreed that he was the one. We want our wedding to be light, genuine, and reflect who we are as a couple and he delivered that. Our guests mentioned how good he was as a host. There were no dull moments and the program was what we have imagined when we were still planning.\n\nWe wanted the guests to enjoy and feel how special they are to us and Sir Les did that. We attended multiple bridal fairs and we never missed to pass by his booth just to check on him. Our guests were amazed how he talks and enunciate his words. It just shows how professional and dedicated he is with his craft.\n\nThere were last minute changes days before our wedding day, and he happily accommodated our request to have another meeting just to polish things out. He was full of positivity and always smiling whenever we talk to him. We felt like he is just our long lost friend whom we got the chance to meet again.\n\nTo the future brides and grooms out there, make sure to have Sir Les as your wedding host and you’ll definitely not regret it.\n\nThank you Sir Les. We hope to work with you again in the future. You’re a blessing to us."
+      },
+      {
+        "name": "Kristine Valmorida-Porras",
+        "event": "Wedding",
+        "photo": "/assets/feedback/feedback-4.jpg",
+        "text": "Big thanks to Host Lester for making our wedding reception so much fun! 🎉 From the moment he took the mic, the energy was through the roof, and he made sure everyone – even our foreign guests – felt included and enjoyed the program. He really knows how to keep things lively and engaging. So happy we had him host our big day! If you want a host who’s got the energy, charm, and knows how to connect with everyone, Host Lester is the one!"
+      },
+      {
+        "name": "Deynard Eleazar Guanzon",
+        "event": "Wedding",
+        "photo": "/assets/feedback/feedback-5.jpg",
+        "text": "We and our guests had a blast! Thanks to you Sir Lester for making our wedding memorable. Fun and energetic vibe, easy to work with and very professional! The man with the golden voice and friendly attitude. A master of his craft. Highly recommended!"
+      },
+      {
+        "name": "Hazeleen Ugat-Perez",
+        "event": "Wedding",
+        "photo": "/assets/feedback/feedback-6.jpg",
+        "text": "If you want to make sure your event goes well hosting-wise, then you won’t need to look any further because Sir Lester is a true professional as he made sure to know the ins and outs of the event and coordinate accordingly with us. He even made sure about all the intricacies regarding the hosting, what language we’d prefer, how to address VIPs, whether to be formal or fun, and he even helped us think of some games to liven up the event even more. All these show that he possesses initiative and attention to detail and I believe that trait is very important to help make any event a success.\n\nSo if you want to ensure your big day, you definitely can’t go wrong by picking Sir Lester as he’ll bring his absolute best to the table.\n\nThanks so much for being part of our special day that marked a milestone in our lives, Sir Lester!\n\nGodbless you more.. we love you."
       }
     ]
   },
   "gallery": {
     "eyebrow": "Gallery",
     "heading": "Around the area",
-    "moreLabel": "View More >>>",
+    "moreLabel": "See more",
     "pageEyebrow": "Gallery",
     "pageHeading": "All photos",
     "items": [
       {
-        "area": "Tagaytay",
+        "area": "Filipino Weddings",
         "src": "/assets/allen-khrishia.jpg",
         "alt": "Allen and Khrishia walking through a garden at Chateau Trouvaille"
       },
       {
-        "area": "Tagaytay",
-        "src": "/assets/lester-portrait.jpg",
-        "alt": "Lester in a dark suit at an event"
-      },
-      {
-        "area": "Cavite",
+        "area": "Filipino Weddings",
         "src": "/assets/erick-shayne.jpg",
         "alt": "Erick and Shayne on a wrought-iron staircase at Antigo de la Cumbre"
       },
       {
-        "area": "Batangas",
+        "area": "Interracial; International Wedding",
+        "src": "/assets/wedding-walk.jpg",
+        "alt": "Bride and groom walking hand in hand down a tree-lined road"
+      },
+      {
+        "area": "Interracial; International Wedding",
+        "src": "/assets/wedding-staircase.jpg",
+        "alt": "Bride and groom coming down an ornate wrought-iron staircase"
+      },
+      {
+        "area": "Beyond Weddings",
+        "src": "/assets/lester-portrait.jpg",
+        "alt": "Lester in a dark suit at an event"
+      },
+      {
+        "area": "Beyond Weddings",
         "src": "/assets/lester-on-stage.jpg",
         "alt": "Lester hosting on stage"
       }

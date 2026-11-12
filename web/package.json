@@ -30,6 +30,7 @@
     "exceljs": "^4.4.0",
     "googleapis": "^188.0.0",
     "lucide-react": "^1.62.0",
+    "mediabunny": "1.62.1",
     "next": "16.4.3",
     "radix-ui": "^1.8.1",
     "react": "19.3.0",

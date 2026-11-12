@@ -11,7 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://hostles.vercel.app';
   return {
     metadataBase: new URL(siteUrl),
-    title: `${meta.title} | Tagaytay Events Host & Voice-over`,
+    title: meta.title,
     description: meta.description,
     alternates: { canonical: '/' },
     icons: { icon: '/assets/favicon-32.png', apple: '/assets/apple-touch-icon.png' },

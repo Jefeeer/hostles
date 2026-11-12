@@ -66,7 +66,72 @@ function Choice({ label, path, options }: { label: string; path: Path; options: 
   );
 }
 
-async function uploadFile(file: File): Promise<string> {
+const MAX_SIDE = 2000; // px; big enough for a full-width hero on a retina screen
+const SMALL = 300 * 1024; // already web-sized: upload as is
+
+/** Shrinks phone/camera photos in the browser before upload. Falls back to the original on any problem. */
+async function compressImage(file: File): Promise<File> {
+  if (file.type === "image/gif" || file.size <= SMALL) return file; // GIFs may be animated
+  try {
+    const bmp = await createImageBitmap(file, { imageOrientation: "from-image" });
+    const scale = Math.min(1, MAX_SIDE / Math.max(bmp.width, bmp.height));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.round(bmp.width * scale);
+    canvas.height = Math.round(bmp.height * scale);
+    canvas.getContext("2d")!.drawImage(bmp, 0, 0, canvas.width, canvas.height);
+    bmp.close();
+    // PNGs may be transparent logos: WebP keeps transparency, JPEG would turn it black.
+    const type = file.type === "image/png" ? "image/webp" : "image/jpeg";
+    const blob = await new Promise<Blob | null>((r) => canvas.toBlob(r, type, 0.82));
+    if (!blob || blob.type !== type || blob.size >= file.size) return file; // e.g. browser can't encode WebP
+    return new File([blob], file.name.replace(/\.[^.]+$/, "") + (type === "image/webp" ? ".webp" : ".jpg"), { type });
+  } catch {
+    return file;
+  }
+}
+
+const VIDEO_MAX_SIDE = 1280; // 720p; plenty for the site's video cards
+const SMALL_VIDEO = 10 * 1024 * 1024;
+
+/**
+ * Re-encodes phone videos (often 100+ MB HEVC .mov) to a 720p H.264 MP4 in the browser with WebCodecs.
+ * Returns the original when it's already small, the browser can't convert it, or a track (e.g. audio) would be dropped.
+ */
+async function compressVideo(file: File, onProgress: (pct: number) => void): Promise<File> {
+  if (file.size <= SMALL_VIDEO) return file;
+  try {
+    const { Input, Output, Conversion, ALL_FORMATS, BlobSource, BufferTarget, Mp4OutputFormat, QUALITY_MEDIUM } = await import("mediabunny");
+    const output = new Output({ format: new Mp4OutputFormat({ fastStart: "in-memory" }), target: new BufferTarget() });
+    const conversion = await Conversion.init({
+      input: new Input({ source: new BlobSource(file), formats: ALL_FORMATS }),
+      output,
+      video: (track) => {
+        const scale = Math.min(1, VIDEO_MAX_SIDE / Math.max(track.displayWidth, track.displayHeight));
+        return { width: Math.round((track.displayWidth * scale) / 2) * 2, codec: "avc", bitrate: QUALITY_MEDIUM, forceTranscode: true };
+      },
+      audio: { codec: "aac", bitrate: 128e3 },
+      showWarnings: false,
+    });
+    if (!conversion.isValid || conversion.discardedTracks.length) return file; // never upload a silent or broken copy
+    conversion.onProgress = (p) => onProgress(Math.round(p * 100));
+    await conversion.execute();
+    const buf = output.target.buffer;
+    if (!buf || buf.byteLength >= file.size) return file;
+    return new File([buf], file.name.replace(/\.[^.]+$/, "") + ".mp4", { type: "video/mp4" });
+  } catch {
+    return file; // unsupported browser/codec: the 50 MB limit check still applies to the original
+  }
+}
+
+async function uploadFile(original: File, onStatus: (s: string) => void): Promise<string> {
+  const video = original.type.startsWith("video/") || isVideo(original.name); // .mov can arrive with an empty type on Windows
+  const file = original.type.startsWith("image/") ? await compressImage(original)
+    : video ? await compressVideo(original, (p) => onStatus(`Compressing… ${p}%`))
+    : original;
+  // Same 50 MB cap as the bucket (MAX_SITE_MEDIA_BYTES); explain why instead of a bare "too large".
+  if (file === original && original.size > 50 * 1024 * 1024 && video)
+    throw new Error("This video is over 50 MB and this browser couldn't shrink it. Try uploading it from your iPhone or a Mac, or export a smaller copy first.");
+  onStatus("Uploading…");
   const target = await prepareUpload(file.name, file.size);
   if ("error" in target) throw new Error(target.error);
   if ("demo" in target) {
@@ -86,16 +151,17 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)(\?|$)/i.test(src);
 
 function Media({ label, path, kind = "image" }: { label: string; path: Path; kind?: "image" | "video" }) {
   const { site, set } = useContext(Editor);
-  const [busy, setBusy] = useState(false);
+  const [status, setStatus] = useState(""); // "" when idle
+  const busy = status !== "";
   const [error, setError] = useState("");
   const value = String(get(site, path) ?? "");
   const Placeholder = kind === "video" ? Video : ImageIcon;
 
   async function upload(file: File) {
-    setBusy(true); setError("");
-    try { set(path, await uploadFile(file)); }
+    setStatus(kind === "video" ? "Preparing…" : "Uploading…"); setError("");
+    try { set(path, await uploadFile(file, setStatus)); }
     catch (e) { setError(e instanceof Error && e.message ? e.message : "Upload failed."); }
-    finally { setBusy(false); }
+    finally { setStatus(""); }
   }
 
   return (
@@ -109,7 +175,7 @@ function Media({ label, path, kind = "image" }: { label: string; path: Path; kin
           <div className="flex items-center gap-3">
             <Button asChild variant="outline" size="sm" className="relative h-9 px-3">
               <label>
-                {busy ? "Uploading…" : `Upload ${kind}`}
+                {status || `Upload ${kind}`}
                 <input type="file" className="absolute inset-0 cursor-pointer opacity-0" disabled={busy}
                   accept={kind === "video" ? "video/mp4,video/webm,video/quicktime" : "image/jpeg,image/png,image/webp,image/gif"}
                   onChange={(e) => { const f = e.target.files?.[0]; if (f) upload(f); e.target.value = ""; }} />
@@ -118,7 +184,7 @@ function Media({ label, path, kind = "image" }: { label: string; path: Path; kin
             {value && <button type="button" className="text-sm text-muted-foreground hover:text-destructive" onClick={() => set(path, "")}>Remove</button>}
           </div>
           <Input className="h-10" aria-label={`${label} link`} value={value} placeholder="or paste a link" onChange={(e) => set(path, e.target.value)} />
-          <small className={hintText}>{kind === "video" ? "MP4, WEBM or MOV · up to 50 MB" : "JPG, PNG, WEBP or GIF"}</small>
+          <small className={hintText}>{kind === "video" ? "MP4, WEBM or MOV · big phone videos are shrunk to about 10 MB first (keep this page open)" : "JPG, PNG, WEBP or GIF · big photos are shrunk automatically"}</small>
           {error && <p className="text-sm text-destructive" role="alert">{error}</p>}
         </div>
       </div>
@@ -256,7 +322,7 @@ const TABS: Tab[] = [
       <Choice label="Layout" path={["cover", "layout"]} options={[["split", "One-sided photo"], ["full", "Whole-page photo"]]} />
       <Media label="Cover photo" path={["cover", "photo"]} />
       <Choice label="Photo focus (which part stays in view)" path={["cover", "focus"]} options={[["center 0%", "Top"], ["center 20%", "Upper"], ["center 50%", "Middle"], ["center 100%", "Bottom"]]} />
-      <p className={cn(hintText, "sm:col-span-2")}>Tip: “Whole-page photo” looks best with a wide (landscape) photo. A tall portrait gets cropped close.</p>
+      <p className={cn(hintText, "sm:col-span-2")}>Tip: “Whole-page photo” puts the photo on the right of a black background (on phones: below the title). A portrait with a plain background works best.</p>
     </Group>
     <Group title="Text">
       <Text label="Small label" path={["cover", "eyebrow"]} />
@@ -302,7 +368,7 @@ const TABS: Tab[] = [
     </Group>
   </> },
   { name: "Feedback", icon: MessageSquareQuote, desc: "Client feedback and the highlight", anchor: "/#feedback", count: (s) => s.feedback.items.length, body: () => <>
-    <Group title="Client feedback" note="Feedback longer than 100 characters shows “Read more”.">
+    <Group title="Client feedback" note="Shown as a sliding row on the home page. Feedback longer than 100 characters shows “Read more”. Blank lines start a new paragraph.">
       <List path={["feedback", "items"]} label="feedback" blank={{ name: "", event: "", photo: "", text: "" }} title={(f) => f.name} thumb={(f) => f.photo}>
         {(b) => <>
           <Text label="Client name" path={[...b, "name"]} />
@@ -321,10 +387,10 @@ const TABS: Tab[] = [
     </Group>
   </> },
   { name: "Gallery", icon: Images, desc: "Photos by area and the gallery page", anchor: "/#gallery", count: (s) => s.gallery.items.length, body: () => <>
-    <Group title="Photos" note="Photos with the same area are grouped. The first photo of each area is featured on the home page.">
+    <Group title="Photos" note="Photos with the same area become one sliding carousel on the home page, titled with the area name. Carousels appear in the order their area first appears in this list.">
       <List path={["gallery", "items"]} label="photo" blank={{ area: "", src: "", alt: "" }} title={(p) => `${p.area || "No area"} · ${p.alt || "Photo"}`} thumb={(p) => p.src}>
         {(b) => <>
-          <Text label="Area" path={[...b, "area"]} hint="e.g. Tagaytay" />
+          <Text label="Area" path={[...b, "area"]} hint="e.g. Filipino Weddings" />
           <Text label="Description" path={[...b, "alt"]} hint="Read aloud by screen readers" />
           <Media label="Photo" path={[...b, "src"]} />
         </>}
@@ -332,8 +398,8 @@ const TABS: Tab[] = [
     </Group>
     <Group title="Home page section">
       <Text label="Small label" path={["gallery", "eyebrow"]} />
-      <Text label="Heading" path={["gallery", "heading"]} />
-      <Text label="View more button" path={["gallery", "moreLabel"]} />
+      <Text label="Heading (read by screen readers)" path={["gallery", "heading"]} />
+      <Text label="See more button" path={["gallery", "moreLabel"]} />
     </Group>
     <Group title="Gallery page">
       <Text label="Small label" path={["gallery", "pageEyebrow"]} />

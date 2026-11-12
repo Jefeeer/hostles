@@ -3,3 +3,6 @@ node_modules/
 
 # Raw client asset drops (large originals; web-ready copies live in web/public/assets)
 Host Lester 2026-*/
+
+# Raw client assets (large videos, contracts, bookings sheet) - optimized copies live in web/public/assets
+/Host Lester 2026 - Assets/

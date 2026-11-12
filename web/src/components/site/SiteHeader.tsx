@@ -23,7 +23,7 @@ export default function SiteHeader({ site, home = false }: { site: Site; home?: 
   const links: [string, string][] = [['#about', nav.about], ['#videos', nav.videos], ['#feedback', nav.feedback], ['#gallery', nav.gallery], ['#inquire', nav.inquiry]];
 
   return (
-    <header className="header">
+    <header className={home ? 'header header--home' : 'header'}>
       <Link className="brand" href={home ? '#top' : '/'} aria-label={`${site.meta.title}, home`}>
         <img src={site.logo} alt="" width={860} height={580} />
       </Link>
